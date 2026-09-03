@@ -19,13 +19,13 @@ debugging cost, flexibility, and whether they help or hurt eval scores).
 **What this project delivers:**
 
 | Deliverable | What it is |
-|---|---|
+|-------------|-----------|
 | **RAG pipeline** | Split → Embed → Store → Retrieve → Rerank → Generate |
 | **Prompt Registry** | Versioned, reviewable prompt lifecycle with eval evidence (audit trail) |
-| **Evaluation harness** | 4 quality scores per query + a DeepEval (LLM-judged) suite |
-| **CLI** | `ingest` / `search` / `ask` / `eval` + read-only `prompt` (current/list) + admin `rollback` (fail-closed, dry-run, confirm) |
+| **Evaluation harness** | 4 quality scores per query + an LLM-judged DeepEval suite |
+| **CLI** | `ingest` / `search` / `ask` / `eval` + read-only `prompt` (current/list) + admin `rollback` (fail-closed, dry-run, confirm) from the terminal |
 | **Web app** (Streamlit) | Chat UI + Eval Dashboard + Trace viewer |
-| **Tests** | Unit + integration suites (offline) |
+| **Tests** | Unit + integration suites (run offline) |
 
 **Scope (in / out):**
 - ✅ **In scope:** dense retrieval, cross-encoder reranking, prompt versioning, keyword +
@@ -81,14 +81,14 @@ produced* is versioned and rolled back with the prompt.
 **Key architecture decisions** (recorded in `doc/notes.md`):
 
 | Decision | Rationale |
-|---|---|
+|----------|-----------|
 | **Same embedding as Step 2** (qwen3-embed, 1024-dim) | Apples-to-apples A/B — not `HuggingFaceEmbeddings`/bge |
-| **Custom `Qwen3Embeddings(Embeddings)` adapter** | qwen3 isn't a HF wrapper; query uses instruction-aware `query_embed` |
+| **Custom `Qwen3Embeddings(Embeddings)` adapter** | qwen3 isn't a HF wrapper; proper abstraction boundary; query uses instruction-aware `query_embed` |
 | **Score recovery via Chroma `_collection`** | `similarity_search` hides scores; we need `min_score` + Step-2 shape |
-| **Reranker = direct cross-encoder, not `ContextualCompressionRetriever`** | dict-shaped retriever; modern `langchain` split path |
-| **Registry + adapter for prompts** | LangChain has no versioned, evidence-linked prompt lifecycle |
-| **`output_schema` on each version** | Output contract is versioned policy → eval + rollback; editing an approved version forces re-eval |
-| **Dense-only** | Hybrid fusion is deliberately deferred to Step 4 |
+| **Reranker = direct cross-encoder, not `ContextualCompressionRetriever`** | That API needs a `Document`-based `BaseRetriever`; our retriever is dict-shaped, and the import path isn't in the modern `langchain` split |
+| **Registry + adapter for prompts** | LangChain has no versioned prompt lifecycle with eval evidence |
+| **`output_schema` on each version** | The output *contract* (format/length/citations/refusal) is versioned policy → gets eval + rollback; editing it on an approved version forces re-eval (no silent change) |
+| **Dense-only** | Hybrid fusion is a Step 4 concern; deferred deliberately |
 
 ---
 
@@ -175,6 +175,15 @@ uv run pytest -v                                  # unit tests (offline, no mode
 uv run pytest -m integration                      # real embedding + Chroma roundtrip
 uv run pytest --cov --cov-report=term-missing      # coverage per module
 ```
+
+### Toolchain
+| Tool | Command | What it checks |
+|------|---------|----------------|
+| **ruff** (lint) | `uv run ruff check src tests eval app.py` | style + correctness lint |
+| **mypy** (types) | `uv run mypy --strict src/langchain_rag` | strict static typing |
+| **pytest** (unit) | `uv run pytest -v` | unit tests (offline, no model download) |
+| **pytest -m integration** | `uv run pytest -m integration` | real embedding + Chroma roundtrip |
+| **coverage** | `uv run pytest --cov --cov-report=term-missing` | code coverage per module |
 
 > **Dev/test convention:** unit tests never hit the network, never load models, never call the
 > LLM (they mock the boundary). Integration tests are the only ones that load real models — and
