@@ -1,0 +1,209 @@
+{
+  "prompts": {
+    "RAG_ANSWER_V1.0.0": {
+      "key": "RAG_ANSWER_V1.0.0",
+      "prompt_id": "RAG_ANSWER",
+      "version": "1.0.0",
+      "template": "You are a helpful assistant. Answer using the retrieved documents. If unsure, say so.",
+      "input_variables": [
+        "query",
+        "context"
+      ],
+      "model": "qwen/qwen2.5-7b",
+      "temperature": 0.1,
+      "status": "retired",
+      "eval_scores": {
+        "accuracy": 0.78,
+        "latency_ms": 210,
+        "evaluated_at": "2026-09-01T20:01:16.631923+00:00",
+        "eval_run_id": "run_2026-08-20"
+      },
+      "run_count": 0,
+      "created_at": "2026-09-01T20:01:16.631745+00:00",
+      "change_note": "Initial registration",
+      "parent_version": null,
+      "output_schema": {
+        "format": "markdown prose, paragraph style (no bulleted lists)",
+        "shape": {
+          "answer": "str",
+          "sources": "list[dict]"
+        },
+        "length_policy": "4-6 sentences, thorough; no padding or repetition",
+        "citation_policy": "optional; no inline markers required",
+        "refusal_string": "I don't have enough context to answer that.",
+        "display": "answer text, then 'Sources:' list with title + score"
+      }
+    },
+    "RAG_ANSWER_V1.1.0": {
+      "key": "RAG_ANSWER_V1.1.0",
+      "prompt_id": "RAG_ANSWER",
+      "version": "1.1.0",
+      "template": "You are a helpful assistant. Answer using the retrieved documents. Cite sources when possible. If unsure, say so.",
+      "input_variables": [
+        "query",
+        "context"
+      ],
+      "model": "qwen/qwen2.5-7b",
+      "temperature": 0.1,
+      "status": "retired",
+      "eval_scores": {
+        "accuracy": 0.82,
+        "latency_ms": 195,
+        "evaluated_at": "2026-09-01T20:01:16.631962+00:00",
+        "eval_run_id": "run_2026-08-25"
+      },
+      "run_count": 0,
+      "created_at": "2026-09-01T20:01:16.631951+00:00",
+      "change_note": "improved citation behavior",
+      "parent_version": "1.0.0",
+      "output_schema": {
+        "format": "markdown prose, paragraph style (no bulleted lists)",
+        "shape": {
+          "answer": "str",
+          "sources": "list[dict]"
+        },
+        "length_policy": "4-6 sentences, thorough; no padding or repetition",
+        "citation_policy": "cite sources when possible; optional inline [source-N] markers",
+        "refusal_string": "I don't have enough context to answer that.",
+        "display": "answer text, then 'Sources:' list with title + score"
+      }
+    },
+    "RAG_ANSWER_V1.2.0": {
+      "key": "RAG_ANSWER_V1.2.0",
+      "prompt_id": "RAG_ANSWER",
+      "version": "1.2.0",
+      "template": "You are a helpful assistant specialized in RAG. Answer using the retrieved documents, cite sources inline, and explicitly state uncertainty. Keep answers concise.",
+      "input_variables": [
+        "query",
+        "context"
+      ],
+      "model": "qwen/qwen2.5-7b",
+      "temperature": 0.1,
+      "status": "approved",
+      "eval_scores": {
+        "accuracy": 0.86,
+        "latency_ms": 183,
+        "evaluated_at": "2026-09-01T20:01:16.631991+00:00",
+        "eval_run_id": "run_2026-09-01"
+      },
+      "run_count": 0,
+      "created_at": "2026-09-01T20:01:16.631980+00:00",
+      "change_note": "concise + inline citations candidate",
+      "parent_version": "1.1.0",
+      "output_schema": {
+        "format": "concise markdown prose, paragraph style (no bulleted lists)",
+        "shape": {
+          "answer": "str",
+          "sources": "list[dict]"
+        },
+        "length_policy": "concise: 3-5 sentences; explicitly state uncertainty; no padding or repetition",
+        "citation_policy": "cite sources inline via [source-N] markers; N = index into retrieved sources",
+        "refusal_string": "I don't have enough context to answer that.",
+        "display": "concise answer text, then 'Sources:' list with title + score"
+      }
+    }
+  },
+  "history": [
+    {
+      "key": "RAG_ANSWER_V1.0.0",
+      "from_status": null,
+      "to_status": "draft",
+      "timestamp": "2026-09-01T20:01:16.631898+00:00",
+      "reason": "Initial registration"
+    },
+    {
+      "key": "RAG_ANSWER_V1.0.0",
+      "from_status": "draft",
+      "to_status": "testing",
+      "timestamp": "2026-09-01T20:01:16.631916+00:00",
+      "reason": "move to testing"
+    },
+    {
+      "key": "RAG_ANSWER_V1.0.0",
+      "from_status": "testing",
+      "to_status": "approved",
+      "timestamp": "2026-09-01T20:01:16.631935+00:00",
+      "reason": "initial approved version"
+    },
+    {
+      "key": "RAG_ANSWER_V1.1.0",
+      "from_status": null,
+      "to_status": "draft",
+      "timestamp": "2026-09-01T20:01:16.631955+00:00",
+      "reason": "improved citation behavior"
+    },
+    {
+      "key": "RAG_ANSWER_V1.1.0",
+      "from_status": "draft",
+      "to_status": "testing",
+      "timestamp": "2026-09-01T20:01:16.631958+00:00",
+      "reason": "move to testing"
+    },
+    {
+      "key": "RAG_ANSWER_V1.0.0",
+      "from_status": "approved",
+      "to_status": "retired",
+      "timestamp": "2026-09-01T20:01:16.631971+00:00",
+      "reason": "improved citation behavior"
+    },
+    {
+      "key": "RAG_ANSWER_V1.1.0",
+      "from_status": "testing",
+      "to_status": "approved",
+      "timestamp": "2026-09-01T20:01:16.631973+00:00",
+      "reason": "improved citation behavior"
+    },
+    {
+      "key": "RAG_ANSWER_V1.2.0",
+      "from_status": null,
+      "to_status": "draft",
+      "timestamp": "2026-09-01T20:01:16.631983+00:00",
+      "reason": "concise + inline citations candidate"
+    },
+    {
+      "key": "RAG_ANSWER_V1.2.0",
+      "from_status": "draft",
+      "to_status": "testing",
+      "timestamp": "2026-09-01T20:01:16.631987+00:00",
+      "reason": "move to testing"
+    },
+    {
+      "key": "RAG_ANSWER_V1.1.0",
+      "from_status": "approved",
+      "to_status": "retired",
+      "timestamp": "2026-09-01T20:01:16.632000+00:00",
+      "reason": "candidate beat incumbent on eval suite: accuracy +0.04, latency -12ms"
+    },
+    {
+      "key": "RAG_ANSWER_V1.2.0",
+      "from_status": "testing",
+      "to_status": "approved",
+      "timestamp": "2026-09-01T20:01:16.632003+00:00",
+      "reason": "candidate beat incumbent on eval suite: accuracy +0.04, latency -12ms"
+    },
+    {
+      "key": "RAG_ANSWER_V1.0.0",
+      "change": "output_schema",
+      "from_schema": "{}",
+      "to_schema": "{\"citation_policy\":\"optional; no inline markers required\",\"display\":\"answer text, then 'Sources:' list with title + score\",\"format\":\"markdown prose, paragraph style (no bulleted lists)\",\"length_policy\":\"4-6 sentences, thorough; no padding or repetition\",\"refusal_string\":\"I don't have enough context to answer that.\",\"shape\":{\"answer\":\"str\",\"sources\":\"list[dict]\"}}",
+      "timestamp": "2026-09-03T17:54:19.004871+00:00",
+      "reason": "Backfilled output_schema (presentation/output rules) for existing seed version"
+    },
+    {
+      "key": "RAG_ANSWER_V1.1.0",
+      "change": "output_schema",
+      "from_schema": "{}",
+      "to_schema": "{\"citation_policy\":\"cite sources when possible; optional inline [source-N] markers\",\"display\":\"answer text, then 'Sources:' list with title + score\",\"format\":\"markdown prose, paragraph style (no bulleted lists)\",\"length_policy\":\"4-6 sentences, thorough; no padding or repetition\",\"refusal_string\":\"I don't have enough context to answer that.\",\"shape\":{\"answer\":\"str\",\"sources\":\"list[dict]\"}}",
+      "timestamp": "2026-09-03T17:54:19.004871+00:00",
+      "reason": "Backfilled output_schema (presentation/output rules) for existing seed version"
+    },
+    {
+      "key": "RAG_ANSWER_V1.2.0",
+      "change": "output_schema",
+      "from_schema": "{}",
+      "to_schema": "{\"citation_policy\":\"cite sources inline via [source-N] markers; N = index into retrieved sources\",\"display\":\"concise answer text, then 'Sources:' list with title + score\",\"format\":\"concise markdown prose, paragraph style (no bulleted lists)\",\"length_policy\":\"concise: 3-5 sentences; explicitly state uncertainty; no padding or repetition\",\"refusal_string\":\"I don't have enough context to answer that.\",\"shape\":{\"answer\":\"str\",\"sources\":\"list[dict]\"}}",
+      "timestamp": "2026-09-03T17:54:19.004871+00:00",
+      "reason": "Backfilled output_schema (presentation/output rules) for existing seed version"
+    }
+  ]
+}

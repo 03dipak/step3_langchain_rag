@@ -1,0 +1,30 @@
+Retrieval-Augmented Generation (RAG) Concepts
+
+RAG combines information retrieval with text generation. Instead of relying solely on a language model's parametric memory, RAG retrieves relevant documents from an external knowledge base and uses them as context for generation. This approach reduces hallucination and keeps answers grounded in source material.
+
+Why RAG:
+Large language models have a knowledge cutoff and can hallucinate facts. RAG addresses both problems by grounding generation in retrieved documents. It is cheaper than fine-tuning and allows knowledge updates without retraining.
+
+Chunking Strategies:
+Documents must be split into chunks for embedding and retrieval. Common strategies include fixed-size chunking (e.g., 512 tokens), sentence-based chunking, and semantic chunking (splitting at topic boundaries). Overlapping chunks (with stride) prevent information loss at boundaries.
+
+Embeddings:
+Embeddings convert text into dense vector representations. Similar texts have similar embeddings. Models like BAAI/bge-base-en-v1.5 (768 dimensions) are commonly used. They capture semantic meaning, not just keywords.
+
+Vector Databases:
+Vector databases store embeddings and enable efficient similarity search. Popular options include Qdrant, Pinecone, Weaviate, and Chroma. They support metadata filtering, which allows combining semantic search with structured filters.
+
+Similarity Search:
+Cosine similarity measures the angle between two vectors, giving a score from -1 to 1. Higher cosine similarity means more similar texts. Search returns the top-k most similar chunks.
+
+Retrieval Methods:
+Dense retrieval uses embedding similarity. Sparse retrieval uses keyword matching (BM25). Hybrid retrieval combines both. Reciprocal Rank Fusion (RRF) merges result lists from multiple retrieval methods.
+
+Reranking:
+After initial retrieval, a reranker re-orders results for better relevance. Cross-encoder rerankers compute query-document similarity directly. They are more accurate but slower than bi-encoders.
+
+Answer Generation:
+Retrieved chunks are formatted into a prompt with instructions to answer based on context. Citations reference specific chunks. The system prompt includes rules like "answer only from the provided context."
+
+Evaluation Metrics:
+Retrieval quality is measured by Context Recall and Context Precision. Answer quality uses Faithfulness and Answer Relevance. These metrics help identify whether failures are in retrieval or generation.

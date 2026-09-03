@@ -1,0 +1,31 @@
+API Design Best Practices
+
+RESTful API Design:
+REST APIs use HTTP methods (GET, POST, PUT, DELETE) to perform operations on resources. Resources are identified by URLs. Use plural nouns for resource names: /users, /orders, /products. Support filtering with query parameters.
+
+Status Codes:
+Use appropriate HTTP status codes. 200 for success, 201 for created, 400 for bad request, 401 for unauthorized, 403 for forbidden, 404 for not found, 422 for validation error, 429 for rate limiting, 500 for server error.
+
+Authentication and Authorization:
+API keys identify the caller. OAuth2 provides delegated access. JWT tokens carry claims about the user. Always use HTTPS. Rate limiting prevents abuse. Store secrets in environment variables, never in code.
+
+Request Validation:
+Validate all input parameters. Check types, ranges, and required fields. Return clear error messages with field names. Use schema validation libraries like Pydantic or Marshmallow.
+
+Response Format:
+Use JSON consistently. Include a consistent envelope. Paginate large collections with cursor or offset-based pagination. Include links for HATEOAS where useful.
+
+Versioning:
+Version your API from the start. Use URL versioning (/v1/users) or header versioning. Never break existing clients without a migration path.
+
+Error Handling:
+Return structured error responses with error codes, messages, and details. Log errors server-side with request IDs for debugging. Never expose internal error details to clients.
+
+Rate Limiting:
+Implement rate limiting to protect your API. Use token bucket or sliding window algorithms. Return 429 status with Retry-After header.
+
+Caching:
+Use HTTP caching headers (ETag, Cache-Control, Last-Modified). Cache expensive operations. Use Redis or Memcached for server-side caching.
+
+Documentation:
+Document your API with OpenAPI/Swagger. Include request/response examples. Provide SDKs or code samples. Keep documentation in sync with implementation.

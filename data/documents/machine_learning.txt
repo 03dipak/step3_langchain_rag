@@ -1,0 +1,21 @@
+Machine Learning Fundamentals
+
+Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It focuses on developing algorithms that can access data and use it to learn for themselves.
+
+Supervised Learning:
+Supervised learning uses labeled training data to learn a mapping from inputs to outputs. Common algorithms include linear regression, logistic regression, decision trees, random forests, and support vector machines. The goal is to generalize from training data to unseen data.
+
+Unsupervised Learning:
+Unsupervised learning finds hidden patterns in data without labeled examples. Clustering algorithms like K-means, DBSCAN, and hierarchical clustering group similar data points together. Dimensionality reduction techniques like PCA and t-SNE help visualize high-dimensional data.
+
+Neural Networks:
+Neural networks are computing systems inspired by biological neural networks. They consist of layers of interconnected nodes (neurons). Deep learning uses neural networks with multiple hidden layers. Common architectures include CNNs for images and RNNs for sequences.
+
+Training and Optimization:
+Models are trained by minimizing a loss function using optimization algorithms like gradient descent. The learning rate controls how much to update model parameters. Overfitting occurs when a model learns noise in training data — prevented by regularization, dropout, and cross-validation.
+
+Transfer Learning:
+Transfer learning reuses a pre-trained model on a new task. Instead of training from scratch, you fine-tune a model that already learned general features. This is especially powerful in NLP with models like BERT and GPT.
+
+Hyperparameter Tuning:
+Hyperparameters control model training (learning rate, batch size, number of layers). Automated approaches include grid search, random search, and Bayesian optimization. Tools like Optuna automate this process.

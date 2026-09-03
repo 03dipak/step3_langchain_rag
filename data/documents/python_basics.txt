@@ -1,0 +1,27 @@
+Python Basics — Key Concepts
+
+Python is a high-level, interpreted programming language known for its simplicity and readability. It supports multiple programming paradigms including procedural, object-oriented, and functional programming.
+
+Variables and Data Types:
+Python is dynamically typed, meaning you don't need to declare variable types explicitly. Common data types include int, float, str, bool, list, dict, tuple, and set. Variables are created when you assign a value to them.
+
+Lists and List Comprehensions:
+Lists are ordered, mutable collections. List comprehensions provide a concise way to create lists: [x**2 for x in range(10)] creates a list of squares from 0 to 9. Lists support indexing, slicing, and methods like append(), extend(), and sort().
+
+Dictionaries:
+Dictionaries store key-value pairs. They are mutable and indexed by keys. Common operations include dict[key], dict.get(key, default), dict.update(), and dict.items() for iteration.
+
+Functions:
+Functions are defined using the def keyword. Python supports default parameters, keyword arguments, *args for positional arguments, and **kwargs for keyword arguments. Functions are first-class objects and can be passed as arguments.
+
+Classes and Objects:
+Python supports class-based OOP with inheritance. Classes are defined using the class keyword. The __init__ method initializes object attributes. Python supports multiple inheritance and method resolution order (MRO).
+
+Error Handling:
+try/except blocks handle exceptions. You can catch specific exceptions or use a bare except. Finally blocks execute regardless of exceptions. Custom exceptions inherit from Exception.
+
+Decorators:
+Decorators modify function behavior using the @decorator syntax. They are functions that take a function and return a modified function. Common uses include logging, timing, and access control.
+
+Generators:
+Generators use yield to produce values lazily. They are memory-efficient for large datasets. Generator expressions look like list comprehensions but use parentheses.
